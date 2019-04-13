@@ -1,0 +1,75 @@
+jobs:
+  - job: Build
+    strategy:
+      matrix:
+        high_sierra:
+          imageName: macos-10.13
+        mojave:
+          imageName: macos-10.14
+    pool:
+      vmImage: $(imageName)
+    steps:
+      - bash: |
+          set -e
+          brew update
+          HOMEBREW_TAP_DIR="/usr/local/Homebrew/Library/Taps/rtimush/homebrew-tap"
+          mkdir -p "$HOMEBREW_TAP_DIR"
+          rm -rf "$HOMEBREW_TAP_DIR"
+          ln -s "$PWD" "$HOMEBREW_TAP_DIR"
+          for formula in tenpureto; do
+            brew test-bot --bintray-org=rtimush \
+                          --root-url=https://dl.bintray.com/rtimush/bottles-tap \
+                          --tap=rtimush/tap \
+                          $formula
+          done
+          mv *.bottle.* "$ARTIFACT_STAGING_DIR/"
+        env:
+          IMAGE_NAME: $(imageName)
+          ARTIFACT_STAGING_DIR: $(Build.ArtifactStagingDirectory)
+      - task: PublishTestResults@2
+        condition: always()
+        inputs:
+          testResultsFormat: JUnit
+          testResultsFiles: brew-test-bot.xml
+          mergeTestResults: true
+          buildPlatform: $(imageName)
+      - task: PublishPipelineArtifact@0
+        inputs:
+          artifactName: bottles-$(imageName)
+          targetPath: $(Build.ArtifactStagingDirectory)
+  - job: Publish
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    pool:
+      vmImage: macos-10.14
+    steps:
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: bottles-macos-10.13
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: bottles-macos-10.14
+      - bash: |
+          set -e
+          brew update
+          HOMEBREW_TAP_DIR="/usr/local/Homebrew/Library/Taps/rtimush/homebrew-tap"
+          mkdir -p "$HOMEBREW_TAP_DIR"
+          rm -rf "$HOMEBREW_TAP_DIR"
+          ln -s "$PWD" "$HOMEBREW_TAP_DIR"
+          brew test-bot --bintray-org=rtimush \
+                        --root-url=https://dl.bintray.com/rtimush/bottles-tap \
+                        --tap=rtimush/tap \
+                        --ci-upload \
+                        $formula
+          git show
+          echo $GITHUB_DEPLOY_KEY | sed 's/\\n/\
+          /g' > github
+          chmod 0600 github
+          mkdir -p ~/.ssh
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          git remote add origin-writeable git@github.com:rtimush/homebrew-tap.git
+          GIT_SSH_COMMAND="ssh -i github" git push origin-writeable
+        env:
+          HOMEBREW_BINTRAY_USER: $(bintray.apiUser)
+          HOMEBREW_BINTRAY_KEY: $(bintray.apiKey)
+          GITHUB_DEPLOY_KEY: $(github.deployKey)
