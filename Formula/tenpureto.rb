@@ -7,6 +7,13 @@ class Tenpureto < Formula
 
   head "https://github.com/rtimush/tenpureto.git"
 
+  bottle do
+    root_url "https://dl.bintray.com/rtimush/bottles-tap"
+    cellar :any
+    sha256 "a39a4df78634aaa7ca3a478ac36fdd0c8a39945b8ef473229ec635de17a01013" => :mojave
+    sha256 "ee786ddd66f2ebd68a1b8c338000f7e456657916202b2defe0def34a55e09276" => :high_sierra
+  end
+
   depends_on "haskell-stack" => :build
   depends_on "icu4c"
 
