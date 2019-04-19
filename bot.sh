@@ -13,6 +13,7 @@ set -euxo pipefail
 #   BINTRAY_USER (optional)              - bintray user name, defaults to BINTRAY_ORG
 #   BINTRAY_KEY                          - bintray API key
 #   GITHUB_DEPLOY_KEY                    - SSH key with (\n can represent a newline, as Azure Pipelines do not support multiline variables)
+#   XCODE_VERSION                        - version of Xcode to use
 #
 
 setupEnvironment() {
@@ -85,7 +86,7 @@ setupTap
 
 case "$1" in
     test)
-        sudo xcode-select --switch /Applications/Xcode_10.1.app/Contents/Developer
+        sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
         brew test-bot --bintray-org="$BINTRAY_ORG" \
             --root-url="https://dl.bintray.com/$BINTRAY_ORG/$BINTRAY_REPO" \
             --tap="$TAP_NAME" \
