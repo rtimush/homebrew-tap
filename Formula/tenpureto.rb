@@ -4,6 +4,7 @@ class Tenpureto < Formula
 
   url "https://github.com/rtimush/tenpureto/archive/v0.1.1.tar.gz"
   sha256 "e18349cf8db2293b453a091ea30755b5d7996b09baadb7a57ca0253e302d95eb"
+  revision 1
 
   head "https://github.com/rtimush/tenpureto.git"
 
