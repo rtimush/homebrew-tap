@@ -11,9 +11,8 @@ class Tenpureto < Formula
   bottle do
     root_url "https://dl.bintray.com/rtimush/bottles-tap"
     cellar :any
-    rebuild 1
-    sha256 "b2e12661a5437a52a90d3d62e262acc5aef0f8a235e8d011d9ee2952dd503d24" => :mojave
-    sha256 "06ce079a47a31cac2185e0e90ebfefd09ee77b69a7c489c6baabf309cf3bf7d3" => :high_sierra
+    sha256 "2576cb3fda43424af57fcc54eaaa8556820538abd283263b9d02f365f4e986d9" => :mojave
+    sha256 "c4a07a5fbdbd5ff18333b9c0f48015fb1b3f309ab8e75475359df73c5d98b4a1" => :high_sierra
   end
 
   depends_on "haskell-stack" => :build
