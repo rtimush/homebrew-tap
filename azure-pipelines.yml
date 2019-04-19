@@ -11,8 +11,10 @@ jobs:
       matrix:
         high_sierra:
           imageName: macos-10.13
+          xcode.version: 10.1
         mojave:
           imageName: macos-10.14
+          xcode.version: 10.2
     pool:
       vmImage: $(imageName)
     steps:
