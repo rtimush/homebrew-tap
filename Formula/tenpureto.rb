@@ -2,8 +2,8 @@ class Tenpureto < Formula
   desc "Project templating tool"
   homepage "https://github.com/rtimush/tenpureto"
 
-  url "https://github.com/rtimush/tenpureto/archive/v0.1.2.tar.gz"
-  sha256 "6c2cdf03c88cc012fb75a5c937fabd3b739cecccbd99e883375516e8dea2ea12"
+  url "https://github.com/rtimush/tenpureto/archive/v0.1.3.tar.gz"
+  sha256 "c359fdf902a92e9748f71089acff8c8d178423024b88dfac0e20cfdcfa9f6138"
 
   head "https://github.com/rtimush/tenpureto.git"
 
