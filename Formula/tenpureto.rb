@@ -17,16 +17,7 @@ class Tenpureto < Formula
   depends_on "haskell-stack" => :build
   depends_on "icu4c"
 
-  resource "ghc" do
-    url "https://github.com/commercialhaskell/ghc/releases/download/ghc-8.6.5-release/ghc-8.6.5-x86_64-apple-darwin.tar.bz2"
-    sha256 "1cc7c7bd7ccd5a7ac7fdd2f6913c070694bf974c9f2fd0df9fe41c7babdab9fd"
-  end
-
   def install
-    programs = buildpath/".brew_home"/".stack"/"programs"/"x86_64-osx"
-    mkdir_p programs
-    cp resource("ghc").fetch, programs/"ghc-#{resource("ghc").version}.tar.bz2"
-
     system "stack",
            "--no-terminal",
            "--jobs=#{ENV.make_jobs}",
