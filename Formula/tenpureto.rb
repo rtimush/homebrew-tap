@@ -2,8 +2,8 @@ class Tenpureto < Formula
   desc "Project templating tool"
   homepage "https://github.com/rtimush/tenpureto"
 
-  url "https://github.com/rtimush/tenpureto/archive/v0.1.4.tar.gz"
-  sha256 "f984a9ecb58b14824df8a3639f8b1cc190d3acb4a5f8ade3b01a923bc62814a2"
+  url "https://github.com/rtimush/tenpureto/archive/v0.2.0.tar.gz"
+  sha256 "881bd1c715e2c561d9068474e75def2a58a4d836c3d31794225f7a6b053f166e"
 
   head "https://github.com/rtimush/tenpureto.git"
 
@@ -18,8 +18,8 @@ class Tenpureto < Formula
   depends_on "icu4c"
 
   resource "ghc" do
-    url "https://github.com/commercialhaskell/ghc/releases/download/ghc-8.6.4-release/ghc-8.6.4-x86_64-apple-darwin.tar.bz2"
-    sha256 "62e7a420016e4ddd8a10b21638f3d3cd1edff81c33761217d2b6e7e86200ba98"
+    url "https://github.com/commercialhaskell/ghc/releases/download/ghc-8.6.5-release/ghc-8.6.5-x86_64-apple-darwin.tar.bz2"
+    sha256 "1cc7c7bd7ccd5a7ac7fdd2f6913c070694bf974c9f2fd0df9fe41c7babdab9fd"
   end
 
   def install
