@@ -27,7 +27,6 @@ setupEnvironment() {
         CI_MODE=--ci-testing
     fi
     export HOMEBREW_NO_ANALYTICS=1
-    export HOMEBREW_NO_AUTO_UPDATE=1
     REPO_NAME="${BUILD_REPOSITORY_ID#*/}"
     ORG_NAME="${BUILD_REPOSITORY_ID%/*}"
     TAP_SHORT_NAME="${REPO_NAME#homebrew-}"
@@ -36,6 +35,7 @@ setupEnvironment() {
     BINTRAY_REPO="${BINTRAY_REPO:-bottles-${TAP_SHORT_NAME}}"
     BINTRAY_USER="${BINTRAY_USER:-${BINTRAY_ORG}}"
     unset TF_BUILD
+    brew update
 }
 
 setupTap() {
