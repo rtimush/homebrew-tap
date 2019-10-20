@@ -1,11 +1,11 @@
 class Tenpureto < Formula
   desc "Project templating tool"
-  homepage "https://github.com/rtimush/tenpureto"
+  homepage "https://github.com/tenpureto/tenpureto"
 
-  url "https://github.com/rtimush/tenpureto/archive/v0.3.1.tar.gz"
-  sha256 "2f6e059b007980371de8a3181fbbfcbec17e736ce26f2d31f2000bb28c755d77"
+  url "https://github.com/tenpureto/tenpureto/archive/v0.4.0.tar.gz"
+  sha256 "bb6a6acd7932f1f1a54bf4f01a7e4ef71f9f2910e7c3d112b9042bd32e8afd1c"
 
-  head "https://github.com/rtimush/tenpureto.git"
+  head "https://github.com/tenpureto/tenpureto.git"
 
   bottle do
     root_url "https://dl.bintray.com/rtimush/bottles-tap"
@@ -15,7 +15,6 @@ class Tenpureto < Formula
   end
 
   depends_on "haskell-stack" => :build
-  depends_on "icu4c"
 
   def install
     system "stack",
