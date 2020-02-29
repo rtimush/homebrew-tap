@@ -86,7 +86,9 @@ setupTap
 
 case "$1" in
     test)
-        sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
+        if [[ ${XCODE_VERSION} != "" ]]; then
+            sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
+        fi
         brew test-bot --bintray-org="$BINTRAY_ORG" \
             --root-url="https://dl.bintray.com/$BINTRAY_ORG/$BINTRAY_REPO" \
             --tap="$TAP_NAME" \
