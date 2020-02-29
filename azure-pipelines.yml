@@ -15,6 +15,9 @@ jobs:
         mojave:
           imageName: macos-10.14
           xcode.version: 11.3
+        catalina:
+          imageName: macos-10.15
+          xcode.version: 11.3
         ubuntu:
           imageName: ubuntu-18.04
           xcode.version: ""
@@ -49,6 +52,9 @@ jobs:
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: bottles-macos-10.14
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: bottles-macos-10.15
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: bottles-ubuntu-18.04
