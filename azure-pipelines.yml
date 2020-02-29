@@ -15,10 +15,17 @@ jobs:
         mojave:
           imageName: macos-10.14
           xcode.version: 10.2.1
+        ubuntu:
+          imageName: ubuntu-18.04
+          xcode.version: ""
     pool:
       vmImage: $(imageName)
     steps:
-      - bash: ./bot.sh test
+      - bash: |
+          sudo rm -rf /usr/local/*
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        condition: eq(variables['Agent.OS'], 'Linux')
+      - bash: PATH=$PATH:/home/linuxbrew/.linuxbrew/bin ./bot.sh test
       - task: PublishTestResults@2
         condition: succeededOrFailed()
         inputs:
@@ -42,6 +49,9 @@ jobs:
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: bottles-macos-10.14
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: bottles-ubuntu-18.04
       - bash: ./bot.sh upload
         env:
           BINTRAY_KEY: $(bintray.apiKey)
