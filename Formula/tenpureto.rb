@@ -14,7 +14,11 @@ class Tenpureto < Formula
   bottle :unneeded
 
   def install
-    mv "tenpureto-#{version}-x86_64-*", "tenpureto"
+    if OS.mac?
+      mv "tenpureto-#{version}-x86_64-darwin", "tenpureto"
+    else
+      mv "tenpureto-#{version}-x86_64-linux", "tenpureto"
+    end
     FileUtils.chmod 0755, "tenpureto"
     mkdir "completions"
     system "sh", "-c", "./tenpureto --bash-completion-script #{bin}/tenpureto >completions/tenpureto"
