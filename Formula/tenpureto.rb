@@ -2,13 +2,13 @@ class Tenpureto < Formula
   desc "Project templating tool"
   homepage "https://github.com/tenpureto/tenpureto"
 
-  version "0.6.0"
+  version "0.6.1"
   if OS.mac?
     url "https://github.com/tenpureto/tenpureto/releases/download/v#{version}/tenpureto-#{version}-x86_64-darwin"
-    sha256 "044a0d0d7aa7c77232e9b23fdd514c432e798c7b700b6027698c3fe7b224cb4e"
+    sha256 "9a7ee1987328e87a7a99e9678e42601cd090a6163250882fdca092f4b58a2ee2"
   else
     url "https://github.com/tenpureto/tenpureto/releases/download/v#{version}/tenpureto-#{version}-x86_64-linux"
-    sha256 "88e984d449b0163529c67f9fba0735be37bae4711c906b7311ca10070707f605"
+    sha256 "623218683c93b744c85fd12aefb82ca7fed777b95e9b3ff2bad016e44500357d"
   end
 
   bottle :unneeded
