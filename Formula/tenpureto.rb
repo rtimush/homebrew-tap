@@ -11,8 +11,6 @@ class Tenpureto < Formula
     sha256 "d1d75d387cddccafe60549be16f88d918be990c3f184669a04274a60ac22b45d"
   end
 
-  bottle :unneeded
-
   def install
     if OS.mac?
       mv "tenpureto-#{version}-x86_64-darwin", "tenpureto"
